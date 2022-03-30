@@ -65,10 +65,10 @@ public class FileService {
             if (resource.exists()) {
                 return resource;
             } else {
-                throw new FileException("File not found " + fileName);
+                throw new FileException("file not found " + fileName);
             }
         } catch (MalformedURLException e) {
-            throw new FileException("File not found " + fileName, e);
+            throw new FileException("file not found " + fileName, e);
         }
     }
 }

@@ -31,6 +31,10 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
+    /**
+     * @param file 参数名称
+     * @return 单个文件上传
+     */
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileService.storeFile(file);
@@ -43,6 +47,10 @@ public class FileController {
                 file.getContentType(), file.getSize());
     }
 
+    /**
+     * @param files 参数名称
+     * @return 多个文件上传
+     */
     @PostMapping("/uploadMultipleFiles")
     public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         List<UploadFileResponse> list = new ArrayList<>();
@@ -59,6 +67,11 @@ public class FileController {
         .collect(Collectors.toList());*/
     }
 
+    /**
+     * @param fileName 要下载的文件名称
+     * @param request
+     * @return 文件下载
+     */
     @GetMapping("/downloadFile/{fileName:.*}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         Resource resource = fileService.loadFileAsResource(fileName);
